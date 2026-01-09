@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_09_230511) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_09_234358) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
@@ -42,12 +52,46 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_09_230511) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chapters", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.integer "position", default: 0, null: false
+    t.bigint "subject_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id", "position"], name: "index_chapters_on_subject_id_and_position"
+    t.index ["subject_id"], name: "index_chapters_on_subject_id"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.bigint "chapter_id", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["chapter_id", "position"], name: "index_lessons_on_chapter_id_and_position"
+    t.index ["chapter_id"], name: "index_lessons_on_chapter_id"
+  end
+
   create_table "subjects", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
   end
 
+  create_table "words", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "lesson_id", null: false
+    t.integer "position", default: 0, null: false
+    t.string "text", null: false
+    t.string "translation"
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "position"], name: "index_words_on_lesson_id_and_position"
+    t.index ["lesson_id"], name: "index_words_on_lesson_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chapters", "subjects"
+  add_foreign_key "lessons", "chapters"
+  add_foreign_key "words", "lessons"
 end

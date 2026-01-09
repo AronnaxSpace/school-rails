@@ -1,0 +1,38 @@
+module Admin
+  class LessonsController < BaseController
+    def create
+      @chapter = Chapter.find(params[:chapter_id])
+      @lesson = @chapter.lessons.build(lesson_params)
+
+      if @lesson.save
+        redirect_to lesson_path(@lesson), notice: 'Lesson was successfully created.'
+      else
+        render :new, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      @lesson = Lesson.find(params[:id])
+
+      if @lesson.update(lesson_params)
+        redirect_to lesson_path(@lesson), notice: 'Lesson was successfully updated.'
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @lesson = Lesson.find(params[:id])
+      chapter = @lesson.chapter
+      @lesson.destroy
+
+      redirect_to chapter_path(chapter), notice: 'Lesson was successfully destroyed.'
+    end
+
+    private
+
+    def lesson_params
+      params.require(:lesson).permit(:name, :position, :content, :audio)
+    end
+  end
+end
