@@ -1,21 +1,30 @@
 module Admin
   class ChaptersController < BaseController
+    def new
+      @subject = Subject.find(params[:subject_id])
+      @chapter = @subject.chapters.build
+    end
+
     def create
       @subject = Subject.find(params[:subject_id])
       @chapter = @subject.chapters.build(chapter_params)
 
       if @chapter.save
-        redirect_to subject_path(@subject), notice: 'Chapter was successfully created.'
+        redirect_to admin_root_path, notice: "Chapter was successfully created."
       else
         render :new, status: :unprocessable_entity
       end
+    end
+
+    def edit
+      @chapter = Chapter.find(params[:id])
     end
 
     def update
       @chapter = Chapter.find(params[:id])
 
       if @chapter.update(chapter_params)
-        redirect_to subject_path(@chapter.subject), notice: 'Chapter was successfully updated.'
+        redirect_to admin_root_path, notice: "Chapter was successfully updated."
       else
         render :edit, status: :unprocessable_entity
       end
@@ -23,10 +32,9 @@ module Admin
 
     def destroy
       @chapter = Chapter.find(params[:id])
-      subject = @chapter.subject
       @chapter.destroy
 
-      redirect_to subject_path(subject), notice: 'Chapter was successfully destroyed.'
+      redirect_to admin_root_path, notice: "Chapter was successfully destroyed."
     end
 
     private

@@ -1,4 +1,4 @@
-<%= form_with(model: [:admin, lesson], class: "space-y-4") do |form| %>
+<%= form_with(model: lesson.new_record? ? [:admin, lesson.chapter, lesson] : [:admin, lesson], class: "space-y-4") do |form| %>
   <% if lesson.errors.any? %>
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
       <h3 class="font-bold mb-2"><%= pluralize(lesson.errors.count, "помилка", "помилки", "помилок") %>:</h3>

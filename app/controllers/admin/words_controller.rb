@@ -1,21 +1,30 @@
 module Admin
   class WordsController < BaseController
+    def new
+      @lesson = Lesson.find(params[:lesson_id])
+      @word = @lesson.words.build
+    end
+
     def create
       @lesson = Lesson.find(params[:lesson_id])
       @word = @lesson.words.build(word_params)
 
       if @word.save
-        redirect_to lesson_path(@lesson), notice: 'Word was successfully created.'
+        redirect_to admin_root_path, notice: "Word was successfully created."
       else
         render :new, status: :unprocessable_entity
       end
+    end
+
+    def edit
+      @word = Word.find(params[:id])
     end
 
     def update
       @word = Word.find(params[:id])
 
       if @word.update(word_params)
-        redirect_to lesson_path(@word.lesson), notice: 'Word was successfully updated.'
+        redirect_to admin_root_path, notice: "Word was successfully updated."
       else
         render :edit, status: :unprocessable_entity
       end
@@ -23,10 +32,9 @@ module Admin
 
     def destroy
       @word = Word.find(params[:id])
-      lesson = @word.lesson
       @word.destroy
 
-      redirect_to lesson_path(lesson), notice: 'Word was successfully destroyed.'
+      redirect_to admin_root_path, notice: "Word was successfully destroyed."
     end
 
     private

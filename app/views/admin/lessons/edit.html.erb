@@ -1,0 +1,21 @@
+<% content_for :title, "Edit Lesson - Admin" %>
+
+<div class="mb-6">
+  <%= link_to admin_root_path, class: "text-blue-600 hover:text-blue-700 font-semibold" do %>
+    ← Back to Dashboard
+  <% end %>
+</div>
+
+<div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl">
+  <h1 class="text-3xl font-bold text-gray-800 mb-2">Edit Lesson</h1>
+  <p class="text-gray-600 mb-6">
+    Subject: <strong><%= @lesson.chapter.subject.name %></strong> →
+    Chapter: <strong><%= @lesson.chapter.name %></strong>
+  </p>
+
+  <%= render "form", lesson: @lesson %>
+
+  <div class="mt-6 pt-6 border-t border-gray-200">
+    <%= button_to "Delete Lesson", admin_lesson_path(@lesson), method: :delete, data: { confirm: "Are you sure? This will delete all words in this lesson!" }, class: "bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors" %>
+  </div>
+</div>

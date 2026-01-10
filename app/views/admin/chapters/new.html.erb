@@ -1,0 +1,14 @@
+<% content_for :title, "New Chapter - Admin" %>
+
+<div class="mb-6">
+  <%= link_to admin_root_path, class: "text-blue-600 hover:text-blue-700 font-semibold" do %>
+    ← Back to Dashboard
+  <% end %>
+</div>
+
+<div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl">
+  <h1 class="text-3xl font-bold text-gray-800 mb-2">Create New Chapter</h1>
+  <p class="text-gray-600 mb-6">Subject: <strong><%= @subject.name %></strong></p>
+
+  <%= render "form", chapter: @chapter %>
+</div>

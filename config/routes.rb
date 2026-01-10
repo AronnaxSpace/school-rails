@@ -12,19 +12,22 @@ Rails.application.routes.draw do
 
   # Admin namespace for write operations (protected by HTTP Basic Auth)
   namespace :admin do
-    resources :subjects, only: [:create, :update, :destroy] do
-      resources :chapters, only: [:create], shallow: true
+    root "dashboard#index"
+    get "dashboard", to: "dashboard#index"
+
+    resources :subjects, only: [:new, :create, :edit, :update, :destroy] do
+      resources :chapters, only: [:new, :create], shallow: true
     end
 
-    resources :chapters, only: [:update, :destroy] do
-      resources :lessons, only: [:create], shallow: true
+    resources :chapters, only: [:edit, :update, :destroy] do
+      resources :lessons, only: [:new, :create], shallow: true
     end
 
-    resources :lessons, only: [:update, :destroy] do
-      resources :words, only: [:create], shallow: true
+    resources :lessons, only: [:edit, :update, :destroy] do
+      resources :words, only: [:new, :create], shallow: true
     end
 
-    resources :words, only: [:update, :destroy]
+    resources :words, only: [:edit, :update, :destroy]
   end
 
   # Root path
