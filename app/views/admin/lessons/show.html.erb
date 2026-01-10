@@ -1,0 +1,105 @@
+<% content_for :title, "#{@lesson.name} - Admin" %>
+
+<div class="mb-6 flex items-center space-x-2 text-sm">
+  <%= link_to "Dashboard", admin_root_path, class: "text-blue-600 hover:text-blue-700" %>
+  <span class="text-gray-400">→</span>
+  <%= link_to @lesson.chapter.subject.name, admin_subject_path(@lesson.chapter.subject), class: "text-blue-600 hover:text-blue-700" %>
+  <span class="text-gray-400">→</span>
+  <%= link_to @lesson.chapter.name, admin_chapter_path(@lesson.chapter), class: "text-blue-600 hover:text-blue-700" %>
+  <span class="text-gray-400">→</span>
+  <span class="text-gray-600"><%= @lesson.name %></span>
+</div>
+
+<div class="bg-white rounded-lg shadow-lg p-8">
+  <div class="flex justify-between items-start mb-6">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800 mb-2"><%= @lesson.name %></h1>
+      <p class="text-gray-600">
+        Chapter: <strong><%= @lesson.chapter.name %></strong> •
+        Position: <%= @lesson.position %>
+      </p>
+    </div>
+    <div class="flex space-x-3">
+      <%= link_to "Edit Lesson", edit_admin_lesson_path(@lesson), class: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors" %>
+      <%= button_to "Delete Lesson", admin_lesson_path(@lesson), method: :delete, data: { confirm: "Are you sure? This will delete all words!" }, class: "bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors" %>
+    </div>
+  </div>
+
+  <!-- Content Preview -->
+  <% if @lesson.content.present? %>
+    <div class="border-t border-gray-200 pt-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Content Preview</h2>
+      <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 max-h-64 overflow-y-auto prose prose-sm">
+        <%= @lesson.content %>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Audio -->
+  <% if @lesson.audio.attached? %>
+    <div class="border-t border-gray-200 pt-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Audio</h2>
+      <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <p class="text-sm text-gray-600 mb-2">
+          <strong>File:</strong> <%= @lesson.audio.filename %>
+        </p>
+        <audio controls class="w-full max-w-md">
+          <source src="<%= url_for(@lesson.audio) %>" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Words Section -->
+  <div class="border-t border-gray-200 pt-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold text-gray-800">Words</h2>
+      <%= link_to "➕ New Word", new_admin_lesson_word_path(@lesson), class: "bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors" %>
+    </div>
+
+    <% if @lesson.words.any? %>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Position</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Word</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Translation</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Audio</th>
+              <th class="px-4 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <% @lesson.words.each do |word| %>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-sm text-gray-600"><%= word.position %></td>
+                <td class="px-4 py-3 text-sm font-semibold text-gray-800"><%= word.text %></td>
+                <td class="px-4 py-3 text-sm text-gray-600"><%= word.translation %></td>
+                <td class="px-4 py-3 text-sm">
+                  <% if word.audio.attached? %>
+                    <audio controls class="h-8">
+                      <source src="<%= url_for(word.audio) %>" type="audio/mpeg">
+                    </audio>
+                  <% else %>
+                    <span class="text-gray-400">No audio</span>
+                  <% end %>
+                </td>
+                <td class="px-4 py-3 text-sm text-right">
+                  <div class="flex justify-end space-x-2">
+                    <%= link_to "Edit", edit_admin_word_path(word), class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs transition-colors" %>
+                    <%= button_to "Delete", admin_word_path(word), method: :delete, data: { confirm: "Are you sure?" }, class: "bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs transition-colors" %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="text-center py-8 bg-gray-50 rounded-lg border border-gray-200">
+        <p class="text-gray-600 mb-4">No words yet</p>
+        <%= link_to "Create First Word", new_admin_lesson_word_path(@lesson), class: "bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors inline-block" %>
+      </div>
+    <% end %>
+  </div>
+</div>

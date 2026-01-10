@@ -1,5 +1,9 @@
 module Admin
   class SubjectsController < BaseController
+    def show
+      @subject = Subject.includes(chapters: :lessons).find(params[:id])
+    end
+
     def new
       @subject = Subject.new
     end

@@ -15,15 +15,15 @@ Rails.application.routes.draw do
     root "dashboard#index"
     get "dashboard", to: "dashboard#index"
 
-    resources :subjects, only: [:new, :create, :edit, :update, :destroy] do
+    resources :subjects, only: [:show, :new, :create, :edit, :update, :destroy] do
       resources :chapters, only: [:new, :create], shallow: true
     end
 
-    resources :chapters, only: [:edit, :update, :destroy] do
+    resources :chapters, only: [:show, :edit, :update, :destroy] do
       resources :lessons, only: [:new, :create], shallow: true
     end
 
-    resources :lessons, only: [:edit, :update, :destroy] do
+    resources :lessons, only: [:show, :edit, :update, :destroy] do
       resources :words, only: [:new, :create], shallow: true
     end
 

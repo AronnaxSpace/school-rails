@@ -1,5 +1,9 @@
 module Admin
   class ChaptersController < BaseController
+    def show
+      @chapter = Chapter.includes(:lessons).find(params[:id])
+    end
+
     def new
       @subject = Subject.find(params[:subject_id])
       @chapter = @subject.chapters.build
