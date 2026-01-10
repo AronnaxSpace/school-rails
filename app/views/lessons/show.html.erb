@@ -1,0 +1,128 @@
+<% content_for :title, "#{@lesson.name} - Школа Aronnax" %>
+
+<!-- Breadcrumbs -->
+<div class="mb-6 flex flex-wrap items-center space-x-2 text-sm md:text-base">
+  <%= link_to subjects_path, class: "text-purple-600 hover:text-purple-800 font-semibold transition-colors" do %>
+    Предмети
+  <% end %>
+  <span class="text-gray-400">→</span>
+  <%= link_to subject_path(@lesson.chapter.subject), class: "text-purple-600 hover:text-purple-800 font-semibold transition-colors" do %>
+    <%= @lesson.chapter.subject.name %>
+  <% end %>
+  <span class="text-gray-400">→</span>
+  <%= link_to chapter_path(@lesson.chapter), class: "text-purple-600 hover:text-purple-800 font-semibold transition-colors" do %>
+    <%= @lesson.chapter.name %>
+  <% end %>
+  <span class="text-gray-400">→</span>
+  <span class="text-gray-700 font-semibold"><%= @lesson.name %></span>
+</div>
+
+<!-- Lesson Header -->
+<div class="bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 rounded-3xl shadow-2xl p-8 md:p-12 mb-8 text-white">
+  <div class="text-center">
+    <!-- Big Letter Display -->
+    <div class="text-9xl md:text-[200px] font-bold mb-4 animate-pulse">
+      <%= @lesson.name.split(' ').last %>
+    </div>
+    <h1 class="text-4xl md:text-5xl font-bold"><%= @lesson.name %></h1>
+
+    <!-- Audio player if available -->
+    <% if @lesson.audio.attached? %>
+      <div class="mt-6 flex justify-center">
+        <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-full px-8 py-4">
+          <audio controls class="w-full max-w-md">
+            <source src="<%= url_for(@lesson.audio) %>" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Lesson Content -->
+<div class="bg-white rounded-3xl shadow-xl p-6 md:p-10 mb-8">
+  <div class="prose prose-lg max-w-none">
+    <% if @lesson.content.present? %>
+      <%= @lesson.content %>
+    <% else %>
+      <div class="text-center py-12">
+        <p class="text-2xl text-gray-600">Контент уроку скоро буде додано</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Words Section -->
+<% if @lesson.words.any? %>
+  <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-3xl shadow-xl p-6 md:p-10 mb-8">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center space-x-3">
+      <span class="text-4xl">📚</span>
+      <span>Слова для вивчення</span>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <% @lesson.words.each do |word| %>
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 p-6">
+          <!-- Word display -->
+          <div class="text-center mb-4">
+            <div class="text-4xl font-bold text-purple-600 mb-2">
+              <%= word.text %>
+            </div>
+            <% if word.translation.present? %>
+              <div class="text-lg text-gray-600">
+                <%= word.translation %>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Audio player if available -->
+          <% if word.audio.attached? %>
+            <div class="mt-4 flex justify-center">
+              <button class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full p-3 transition-all transform hover:scale-110">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/>
+                </svg>
+              </button>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<!-- Navigation -->
+<div class="flex justify-between items-center mt-8">
+  <% prev_lesson = @lesson.chapter.lessons.where('position < ?', @lesson.position).last %>
+  <% next_lesson = @lesson.chapter.lessons.where('position > ?', @lesson.position).first %>
+
+  <% if prev_lesson %>
+    <%= link_to lesson_path(prev_lesson), class: "inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-6 py-3 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg" do %>
+      <span class="text-2xl">←</span>
+      <span>Попередній урок</span>
+    <% end %>
+  <% else %>
+    <div></div>
+  <% end %>
+
+  <%= link_to chapter_path(@lesson.chapter), class: "bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg" do %>
+    Всі уроки
+  <% end %>
+
+  <% if next_lesson %>
+    <%= link_to lesson_path(next_lesson), class: "inline-flex items-center space-x-2 bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white px-6 py-3 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-lg" do %>
+      <span>Наступний урок</span>
+      <span class="text-2xl">→</span>
+    <% end %>
+  <% else %>
+    <div></div>
+  <% end %>
+</div>
+
+<!-- Encouragement message -->
+<div class="mt-12 text-center bg-gradient-to-r from-yellow-200 via-green-200 to-blue-200 rounded-3xl p-8">
+  <p class="text-3xl font-bold text-gray-800">
+    Молодець! Продовжуй навчання! 🌟✨
+  </p>
+</div>

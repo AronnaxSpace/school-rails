@@ -1,0 +1,81 @@
+<% content_for :title, "#{@subject.name} - Школа Aronnax" %>
+
+<!-- Back button -->
+<div class="mb-6">
+  <%= link_to subjects_path, class: "inline-flex items-center space-x-2 text-purple-600 hover:text-purple-800 font-semibold text-lg transition-colors" do %>
+    <span class="text-2xl">←</span>
+    <span>Назад до предметів</span>
+  <% end %>
+</div>
+
+<!-- Subject Header -->
+<div class="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-3xl shadow-2xl p-8 mb-12 text-white">
+  <div class="flex items-center space-x-4 mb-4">
+    <div class="text-7xl">📖</div>
+    <div>
+      <h1 class="text-5xl font-bold mb-2"><%= @subject.name %></h1>
+      <p class="text-2xl opacity-90">Обирай розділ для навчання!</p>
+    </div>
+  </div>
+</div>
+
+<!-- Chapters Grid -->
+<% if @subject.chapters.empty? %>
+  <div class="text-center py-12 bg-white rounded-3xl shadow-lg">
+    <div class="text-6xl mb-4">📑</div>
+    <p class="text-2xl text-gray-600">Поки що немає розділів у цьому предметі</p>
+  </div>
+<% else %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <% @subject.chapters.each_with_index do |chapter, index| %>
+      <%= link_to chapter_path(chapter), class: "group" do %>
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 overflow-hidden border-4 border-transparent hover:border-pink-400">
+          <div class="p-6">
+            <!-- Chapter number badge -->
+            <div class="flex items-start justify-between mb-4">
+              <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold shadow-lg">
+                <%= index + 1 %>
+              </div>
+              <div class="text-4xl animate-bounce">
+                <%= chapter.name.include?('Букви') ? '🔤' : '📚' %>
+              </div>
+            </div>
+
+            <!-- Chapter name -->
+            <h2 class="text-2xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors">
+              <%= chapter.name %>
+            </h2>
+
+            <!-- Lessons count -->
+            <div class="flex items-center space-x-2 text-gray-600 mb-4">
+              <span class="text-2xl">📝</span>
+              <span class="text-lg">
+                <%= pluralize(chapter.lessons.count, 'урок', 'уроки', 'уроків') %>
+              </span>
+            </div>
+
+            <!-- Progress bar (placeholder) -->
+            <div class="bg-gray-200 rounded-full h-3 mb-4">
+              <div class="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <!-- Start button -->
+            <div class="flex justify-end">
+              <span class="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full font-bold group-hover:from-purple-600 group-hover:to-pink-600 transition-all">
+                <span>Почати</span>
+                <span class="text-xl">→</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- Fun decorative section -->
+<div class="mt-12 text-center">
+  <p class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+    Бажаємо гарного навчання! 🎉
+  </p>
+</div>

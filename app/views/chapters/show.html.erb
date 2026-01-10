@@ -1,0 +1,70 @@
+<% content_for :title, "#{@chapter.name} - #{@chapter.subject.name}" %>
+
+<!-- Breadcrumbs -->
+<div class="mb-6 flex items-center space-x-2 text-lg">
+  <%= link_to subjects_path, class: "text-purple-600 hover:text-purple-800 font-semibold transition-colors" do %>
+    Предмети
+  <% end %>
+  <span class="text-gray-400">→</span>
+  <%= link_to subject_path(@chapter.subject), class: "text-purple-600 hover:text-purple-800 font-semibold transition-colors" do %>
+    <%= @chapter.subject.name %>
+  <% end %>
+  <span class="text-gray-400">→</span>
+  <span class="text-gray-700 font-semibold"><%= @chapter.name %></span>
+</div>
+
+<!-- Chapter Header -->
+<div class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl shadow-2xl p-8 mb-12 text-white">
+  <div class="flex items-center space-x-4">
+    <div class="text-7xl animate-bounce">🔤</div>
+    <div>
+      <h1 class="text-5xl font-bold mb-2"><%= @chapter.name %></h1>
+      <p class="text-2xl opacity-90">
+        <%= pluralize(@chapter.lessons.count, 'урок', 'уроки', 'уроків') %> для вивчення
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Lessons Grid -->
+<% if @chapter.lessons.empty? %>
+  <div class="text-center py-12 bg-white rounded-3xl shadow-lg">
+    <div class="text-6xl mb-4">📝</div>
+    <p class="text-2xl text-gray-600">Поки що немає уроків у цьому розділі</p>
+  </div>
+<% else %>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <% @chapter.lessons.each do |lesson| %>
+      <%= link_to lesson_path(lesson), class: "group" do %>
+        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-110 transition-all duration-300 overflow-hidden border-4 border-transparent hover:border-yellow-400 aspect-square flex flex-col items-center justify-center p-4">
+          <!-- Lesson emoji/icon -->
+          <div class="text-5xl mb-2 group-hover:scale-125 transition-transform">
+            <%= lesson.name.include?('Буква') ? lesson.name.split(' ').last : '📖' %>
+          </div>
+
+          <!-- Lesson name -->
+          <h3 class="text-lg font-bold text-gray-800 text-center group-hover:text-purple-600 transition-colors">
+            <%= lesson.name %>
+          </h3>
+
+          <!-- Word count badge -->
+          <% if lesson.words.any? %>
+            <div class="mt-2 bg-gradient-to-r from-green-400 to-blue-500 text-white text-xs px-3 py-1 rounded-full font-bold">
+              <%= lesson.words.count %> слів
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- Motivational message -->
+<div class="mt-12 text-center bg-gradient-to-r from-yellow-200 via-pink-200 to-purple-200 rounded-3xl p-8">
+  <p class="text-3xl font-bold text-gray-800 mb-2">
+    Вивчай букви разом з нами! 🌈
+  </p>
+  <p class="text-xl text-gray-700">
+    Кожна буква - це нова пригода!
+  </p>
+</div>
