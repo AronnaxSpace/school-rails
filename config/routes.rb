@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Public read-only routes
-  resources :subjects, only: [:index, :show] do
-    resources :chapters, only: [:show], shallow: true do
-      resources :lessons, only: [:show], shallow: true
+  resources :subjects, only: [ :index, :show ] do
+    resources :chapters, only: [ :show ], shallow: true do
+      resources :lessons, only: [ :show ], shallow: true
     end
   end
 
@@ -15,19 +15,19 @@ Rails.application.routes.draw do
     root "dashboard#index"
     get "dashboard", to: "dashboard#index"
 
-    resources :subjects, only: [:show, :new, :create, :edit, :update, :destroy] do
-      resources :chapters, only: [:new, :create], shallow: true
+    resources :subjects, only: [ :show, :new, :create, :edit, :update, :destroy ] do
+      resources :chapters, only: [ :new, :create ], shallow: true
     end
 
-    resources :chapters, only: [:show, :edit, :update, :destroy] do
-      resources :lessons, only: [:new, :create], shallow: true
+    resources :chapters, only: [ :show, :edit, :update, :destroy ] do
+      resources :lessons, only: [ :new, :create ], shallow: true
     end
 
-    resources :lessons, only: [:show, :edit, :update, :destroy] do
-      resources :words, only: [:new, :create], shallow: true
+    resources :lessons, only: [ :show, :edit, :update, :destroy ] do
+      resources :words, only: [ :new, :create ], shallow: true
     end
 
-    resources :words, only: [:edit, :update, :destroy]
+    resources :words, only: [ :edit, :update, :destroy ]
   end
 
   # Root path

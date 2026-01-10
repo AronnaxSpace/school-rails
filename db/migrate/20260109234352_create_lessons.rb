@@ -8,6 +8,6 @@ class CreateLessons < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :lessons, [:chapter_id, :position]
+    add_index :lessons, [ :chapter_id, :position ]
   end
 end

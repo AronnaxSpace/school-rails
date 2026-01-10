@@ -6,170 +6,170 @@ UKRAINIAN_LETTERS = %w[А Б В Г Ґ Д Е Є Ж З И І Ї Й К Л М Н О 
 
 # Sample words for each letter with translations
 SAMPLE_WORDS = {
-  'А' => [
-    ['автобус', 'bus'],
-    ['абетка', 'alphabet'],
-    ['арбуз', 'watermelon']
+  "А" => [
+    [ "автобус", "bus" ],
+    [ "абетка", "alphabet" ],
+    [ "арбуз", "watermelon" ]
   ],
-  'Б' => [
-    ['бабуся', 'grandmother'],
-    ['батько', 'father'],
-    ['білка', 'squirrel']
+  "Б" => [
+    [ "бабуся", "grandmother" ],
+    [ "батько", "father" ],
+    [ "білка", "squirrel" ]
   ],
-  'В' => [
-    ['вода', 'water'],
-    ['вулиця', 'street'],
-    ['вікно', 'window']
+  "В" => [
+    [ "вода", "water" ],
+    [ "вулиця", "street" ],
+    [ "вікно", "window" ]
   ],
-  'Г' => [
-    ['гора', 'mountain'],
-    ['город', 'garden'],
-    ['голова', 'head']
+  "Г" => [
+    [ "гора", "mountain" ],
+    [ "город", "garden" ],
+    [ "голова", "head" ]
   ],
-  'Ґ' => [
-    ['ґанок', 'porch'],
-    ['ґудзик', 'button'],
-    ['ґава', 'crow']
+  "Ґ" => [
+    [ "ґанок", "porch" ],
+    [ "ґудзик", "button" ],
+    [ "ґава", "crow" ]
   ],
-  'Д' => [
-    ['дім', 'house'],
-    ['дорога', 'road'],
-    ['дерево', 'tree']
+  "Д" => [
+    [ "дім", "house" ],
+    [ "дорога", "road" ],
+    [ "дерево", "tree" ]
   ],
-  'Е' => [
-    ['екран', 'screen'],
-    ['етаж', 'floor'],
-    ['ехо', 'echo']
+  "Е" => [
+    [ "екран", "screen" ],
+    [ "етаж", "floor" ],
+    [ "ехо", "echo" ]
   ],
-  'Є' => [
-    ['єдиний', 'only one'],
-    ['Європа', 'Europe'],
-    ['єнот', 'raccoon']
+  "Є" => [
+    [ "єдиний", "only one" ],
+    [ "Європа", "Europe" ],
+    [ "єнот", "raccoon" ]
   ],
-  'Ж' => [
-    ['жаба', 'frog'],
-    ['життя', 'life'],
-    ['жінка', 'woman']
+  "Ж" => [
+    [ "жаба", "frog" ],
+    [ "життя", "life" ],
+    [ "жінка", "woman" ]
   ],
-  'З' => [
-    ['зима', 'winter'],
-    ['зоря', 'star'],
-    ['земля', 'earth']
+  "З" => [
+    [ "зима", "winter" ],
+    [ "зоря", "star" ],
+    [ "земля", "earth" ]
   ],
-  'И' => [
-    ['игра', 'game'],
-    ['історія', 'history'],
-    ['іграшка', 'toy']
+  "И" => [
+    [ "игра", "game" ],
+    [ "історія", "history" ],
+    [ "іграшка", "toy" ]
   ],
-  'І' => [
-    ['ім\'я', 'name'],
-    ['іній', 'frost'],
-    ['індик', 'turkey']
+  "І" => [
+    [ "ім'я", "name" ],
+    [ "іній", "frost" ],
+    [ "індик", "turkey" ]
   ],
-  'Ї' => [
-    ['їжа', 'food'],
-    ['їжак', 'hedgehog'],
-    ['Їжачок', 'little hedgehog']
+  "Ї" => [
+    [ "їжа", "food" ],
+    [ "їжак", "hedgehog" ],
+    [ "Їжачок", "little hedgehog" ]
   ],
-  'Й' => [
-    ['йод', 'iodine'],
-    ['йогурт', 'yogurt'],
-    ['йти', 'to go']
+  "Й" => [
+    [ "йод", "iodine" ],
+    [ "йогурт", "yogurt" ],
+    [ "йти", "to go" ]
   ],
-  'К' => [
-    ['кіт', 'cat'],
-    ['книга', 'book'],
-    ['корова', 'cow']
+  "К" => [
+    [ "кіт", "cat" ],
+    [ "книга", "book" ],
+    [ "корова", "cow" ]
   ],
-  'Л' => [
-    ['лис', 'fox'],
-    ['ліс', 'forest'],
-    ['лелека', 'stork']
+  "Л" => [
+    [ "лис", "fox" ],
+    [ "ліс", "forest" ],
+    [ "лелека", "stork" ]
   ],
-  'М' => [
-    ['мама', 'mother'],
-    ['місяць', 'month/moon'],
-    ['малюнок', 'drawing']
+  "М" => [
+    [ "мама", "mother" ],
+    [ "місяць", "month/moon" ],
+    [ "малюнок", "drawing" ]
   ],
-  'Н' => [
-    ['ніс', 'nose'],
-    ['ніч', 'night'],
-    ['небо', 'sky']
+  "Н" => [
+    [ "ніс", "nose" ],
+    [ "ніч", "night" ],
+    [ "небо", "sky" ]
   ],
-  'О' => [
-    ['око', 'eye'],
-    ['озеро', 'lake'],
-    ['осінь', 'autumn']
+  "О" => [
+    [ "око", "eye" ],
+    [ "озеро", "lake" ],
+    [ "осінь", "autumn" ]
   ],
-  'П' => [
-    ['птах', 'bird'],
-    ['поле', 'field'],
-    ['привіт', 'hello']
+  "П" => [
+    [ "птах", "bird" ],
+    [ "поле", "field" ],
+    [ "привіт", "hello" ]
   ],
-  'Р' => [
-    ['рука', 'hand'],
-    ['річка', 'river'],
-    ['ранок', 'morning']
+  "Р" => [
+    [ "рука", "hand" ],
+    [ "річка", "river" ],
+    [ "ранок", "morning" ]
   ],
-  'С' => [
-    ['сонце', 'sun'],
-    ['сім\'я', 'family'],
-    ['стіл', 'table']
+  "С" => [
+    [ "сонце", "sun" ],
+    [ "сім'я", "family" ],
+    [ "стіл", "table" ]
   ],
-  'Т' => [
-    ['тато', 'dad'],
-    ['трава', 'grass'],
-    ['тигр', 'tiger']
+  "Т" => [
+    [ "тато", "dad" ],
+    [ "трава", "grass" ],
+    [ "тигр", "tiger" ]
   ],
-  'У' => [
-    ['урок', 'lesson'],
-    ['учитель', 'teacher'],
-    ['улюблений', 'favorite']
+  "У" => [
+    [ "урок", "lesson" ],
+    [ "учитель", "teacher" ],
+    [ "улюблений", "favorite" ]
   ],
-  'Ф' => [
-    ['футбол', 'football'],
-    ['фарба', 'paint'],
-    ['фонтан', 'fountain']
+  "Ф" => [
+    [ "футбол", "football" ],
+    [ "фарба", "paint" ],
+    [ "фонтан", "fountain" ]
   ],
-  'Х' => [
-    ['хата', 'house'],
-    ['хліб', 'bread'],
-    ['хмара', 'cloud']
+  "Х" => [
+    [ "хата", "house" ],
+    [ "хліб", "bread" ],
+    [ "хмара", "cloud" ]
   ],
-  'Ц' => [
-    ['цукор', 'sugar'],
-    ['цвях', 'nail'],
-    ['цирк', 'circus']
+  "Ц" => [
+    [ "цукор", "sugar" ],
+    [ "цвях", "nail" ],
+    [ "цирк", "circus" ]
   ],
-  'Ч' => [
-    ['час', 'time'],
-    ['червень', 'June'],
-    ['чоловік', 'man']
+  "Ч" => [
+    [ "час", "time" ],
+    [ "червень", "June" ],
+    [ "чоловік", "man" ]
   ],
-  'Ш' => [
-    ['школа', 'school'],
-    ['шапка', 'hat'],
-    ['шум', 'noise']
+  "Ш" => [
+    [ "школа", "school" ],
+    [ "шапка", "hat" ],
+    [ "шум", "noise" ]
   ],
-  'Щ' => [
-    ['щастя', 'happiness'],
-    ['щока', 'cheek'],
-    ['щур', 'rat']
+  "Щ" => [
+    [ "щастя", "happiness" ],
+    [ "щока", "cheek" ],
+    [ "щур", "rat" ]
   ],
-  'Ь' => [
-    ['день', 'day'],
-    ['сіль', 'salt'],
-    ['кінь', 'horse']
+  "Ь" => [
+    [ "день", "day" ],
+    [ "сіль", "salt" ],
+    [ "кінь", "horse" ]
   ],
-  'Ю' => [
-    ['юнак', 'young man'],
-    ['юрба', 'crowd'],
-    ['юнга', 'cabin boy']
+  "Ю" => [
+    [ "юнак", "young man" ],
+    [ "юрба", "crowd" ],
+    [ "юнга", "cabin boy" ]
   ],
-  'Я' => [
-    ['яблуко', 'apple'],
-    ['ялинка', 'fir tree'],
-    ['ягода', 'berry']
+  "Я" => [
+    [ "яблуко", "apple" ],
+    [ "ялинка", "fir tree" ],
+    [ "ягода", "berry" ]
   ]
 }
 
@@ -178,11 +178,11 @@ puts "  Seeding Ukrainian ABC (Буквар)"
 puts "="*60
 
 # Create or find the subject
-subject = Subject.find_or_create_by!(name: 'Буквар (Ukrainian ABC)')
+subject = Subject.find_or_create_by!(name: "Буквар (Ukrainian ABC)")
 puts "✓ Subject created: #{subject.name}"
 
 # Create or find the chapter
-chapter = subject.chapters.find_or_create_by!(name: 'Букви (Letters)', position: 0)
+chapter = subject.chapters.find_or_create_by!(name: "Букви (Letters)", position: 0)
 puts "✓ Chapter created: #{chapter.name}"
 
 # Create lessons for each letter
